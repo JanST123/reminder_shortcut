@@ -8,6 +8,9 @@ It will parse a string that contains details for creating a task like it's known
 
 As the script uses [chrono-node](https://www.npmjs.com/package/chrono-node) for parsing dates, it supports all languages for date parsing which chrono-node supports. At the time writing these are `en, en_GB, de, pt, es, fr, ja`. You can pass the desired language in the `language` property of the JSON payload. It defaults to `en`
 
+## Installation
+Run `npm i` and then start the server with `node parse.js`. It will listen on `http://localhost:3000`
+
 ## Hosted service
 This script is also hosted at https://reminder.jan8.de Feel free to use it. 
 
@@ -27,4 +30,4 @@ $ curl -X POST -H'Content-Type: application/json' -d'{"text": "morgen 10am doc a
 The output can be used by Apple "Shortcuts" App to create a new "Reminder" with natural input. You can download the Shortcut here: 
 https://www.icloud.com/shortcuts/b886cabf590341058077c64db7a6de58
 
-Read more about it here: https://janpedia.de
+Read more about it here: https://janpedia.de/en/software-en/quick-input-for-apple-reminders/
