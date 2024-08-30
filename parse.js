@@ -44,10 +44,17 @@ app.post('/', function (req, res) {
   // try german first cause it's more special
 
   const localChrono = (language in chrono) ? chrono[language] : chrono;
+  const now = new Date();
 
-  let date = localChrono.parseDate(text);
+  // if we have a date without year, append the current year to support e.g. '16.02.' 
+  const dateWithourYearRx = /(((3[0-1])|([0-2][0-9]))\.((0[1-9])|(1[0-2]))\.)(\W)/;
+  if (text.match(dateWithourYearRx)) {
+    text = text.replace(dateWithourYearRx, '$1' + now.getFullYear() + '$8');
+  }
+
+  let date = localChrono.parseDate(text, now, { forwardDate: true });
   if (date) {
-    const parseDetails = localChrono.parse(text);
+    const parseDetails = localChrono.parse(text, now, { forwardDate: true });
     if (parseDetails && parseDetails.length && parseDetails[0].index !== undefined) {
       text = text.substring(0, parseDetails[0].index) + text.substring(parseDetails[0].index + parseDetails[0].text.length + 1);
     }
